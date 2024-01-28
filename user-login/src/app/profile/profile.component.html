@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="page-wrap">
+        <div class="session-form-hold">
+            <div class="page-wrap h-full slate">
+                <div class="session-form-hold">
+                    <mat-progress-bar mode="determinate" class="session-progress"></mat-progress-bar>
+                    <mat-card class="!m-0">
+                        <mat-card-header>
+                            <div class="flex flex-col items-center !py-4">
+                                <h2 class="text-muted m-0">Welcome user! Check your files here.</h2>
+                            </div>
+                        </mat-card-header>
+                        <mat-card-content>
+
+                            <button>
+                                <label for="fileInput">select File</label>
+                                <input type="file" accept=".pdf,.doc,.docx>" id="fileInput" style="display: none;"
+                                    (change)="onFileSelected($event)">
+                            </button>
+                            <p>{{selectedFileName}}</p><br>
+                            <input type="text" placeholder="Enter Unique Code" [(ngModel)]="uniqueCode"><br><br>
+                            <button mat-raised-button color="primary" class="upload-button"
+                                (click)="onUploadFile()">Upload File</button>
+                            <br><br>
+
+                            <div *ngIf="files.length > 0">
+                                <p>Need to enter unique code for file view and download</p>
+                                <div *ngFor="let file of files" class="file-box">
+                                    <div class="file-details">
+                                        <p>File ID: {{ file.id }}</p>
+                                    </div>
+                                    <div class="file-actions">
+                                        <button mat-button (click)="viewAndDownloadFile()">View</button>
+                                        <button mat-button color="warn" (click)="removeFile(file.id)">Remove</button>
+                                    </div><br><br>
+
+                                </div>
+                            </div>
+                            <div *ngIf="files.length === 0">
+                                <p>No files found.</p>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
